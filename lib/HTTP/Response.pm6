@@ -37,7 +37,7 @@ multi method new(Blob $header-chunk) {
     my $code = (try $rl.split(' ')[1].Int) // 500;
     my $response = self.new($code);
     if $header.defined {
-        $response.header.parse( $header.subst(/"\r"?"\n"$$/, '') );
+        $response.header.parse( $header.chomp );
     }
     return $response;
 }
